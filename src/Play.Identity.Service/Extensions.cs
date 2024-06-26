@@ -12,6 +12,6 @@ public static class Extensions
             user.Email,
             user.Gil,
             user.CreatedOn
-        )
+        );
     }
 }

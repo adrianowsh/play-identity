@@ -7,9 +7,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMongodbIdentitySettings(builder.Configuration);
-var app = builder.Build();
+builder.Services.AddIdentityServerSettings(builder.Configuration);
 
-// Configure the HTTP request pipeline.
+var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -17,6 +17,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseIdentityServer();
 app.UseAuthorization();
 app.MapControllers();
 app.MapRazorPages();

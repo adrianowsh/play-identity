@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using Play.Common.Settings;
 using Play.Identity.Service.Entities;
+using Play.Identity.Service.Settings;
 
 namespace Play.Identity.Service;
 
@@ -24,4 +25,21 @@ public static class DependencyInjection
                    );
         return services;
     }
+
+    public static IServiceCollection AddIdentityServerSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        var identityServerSettings = configuration.GetSection(nameof(IdentityServerSettings)).Get<IdentityServerSettings>();
+        services.AddIdentityServer(options =>
+        {
+            options.Events.RaiseSuccessEvents = true;
+            options.Events.RaiseFailureEvents = true;
+            options.Events.RaiseErrorEvents = true;
+        })
+                  .AddAspNetIdentity<ApplicationUser>()
+                  .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
+                  .AddInMemoryClients(identityServerSettings.Clients)
+                  .AddInMemoryIdentityResources(identityServerSettings.IdentityResources);
+        return services;
+    }
+
 }
