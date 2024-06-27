@@ -37,6 +37,7 @@ public static class DependencyInjection
         })
                   .AddAspNetIdentity<ApplicationUser>()
                   .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
+                  .AddInMemoryApiResources(identityServerSettings.ApiResources)
                   .AddInMemoryClients(identityServerSettings.Clients)
                   .AddInMemoryIdentityResources(identityServerSettings.IdentityResources);
         return services;
