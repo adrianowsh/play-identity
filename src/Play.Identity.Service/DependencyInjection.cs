@@ -40,6 +40,8 @@ public static class DependencyInjection
         .AddInMemoryApiResources(identityServerSettings.ApiResources)
         .AddInMemoryClients(identityServerSettings.Clients)
         .AddInMemoryIdentityResources(identityServerSettings.IdentityResources);
+
+        services.AddLocalApiAuthentication();
         return services;
     }
 
