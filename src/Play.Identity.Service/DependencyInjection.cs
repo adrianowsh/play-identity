@@ -35,11 +35,11 @@ public static class DependencyInjection
             options.Events.RaiseFailureEvents = true;
             options.Events.RaiseErrorEvents = true;
         })
-                  .AddAspNetIdentity<ApplicationUser>()
-                  .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
-                  .AddInMemoryApiResources(identityServerSettings.ApiResources)
-                  .AddInMemoryClients(identityServerSettings.Clients)
-                  .AddInMemoryIdentityResources(identityServerSettings.IdentityResources);
+        .AddAspNetIdentity<ApplicationUser>()
+        .AddInMemoryApiScopes(identityServerSettings.ApiScopes)
+        .AddInMemoryApiResources(identityServerSettings.ApiResources)
+        .AddInMemoryClients(identityServerSettings.Clients)
+        .AddInMemoryIdentityResources(identityServerSettings.IdentityResources);
         return services;
     }
 
