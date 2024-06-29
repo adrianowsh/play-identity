@@ -1,7 +1,9 @@
 using Play.Identity.Service;
+using Play.Identity.Service.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+builder.Services.AddHostedService<IdentitySeedHostedService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMongodbIdentitySettings(builder.Configuration);

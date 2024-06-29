@@ -16,13 +16,14 @@ public static class DependencyInjection
         var serviceSettings = configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
         var mongoDbSettings = configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 
-        services.AddDefaultIdentity<ApplicationUser>()
+        services.Configure<IdentitySettings>(configuration.GetSection(nameof(IdentitySettings)))
+                  .AddDefaultIdentity<ApplicationUser>()
                   .AddRoles<ApplicationRole>()
-                   .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
-                   (
-                      mongoDbSettings.ConnectionString,
-                      serviceSettings.ServiceName
-                   );
+                  .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
+                  (
+                     mongoDbSettings.ConnectionString,
+                     serviceSettings.ServiceName
+                  );
         return services;
     }
 
